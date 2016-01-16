@@ -38,7 +38,7 @@ function getName() {
 //then alerts "Welcome, " plus whatever the users name is.
 
 function welcome() {
-  alert("Wecome " + getName() +"!");
+  alert("Welcome, " + getName());
 }
 
 // welcome();
@@ -80,11 +80,11 @@ function myName() {
 
 //Now save the function definition of myName into a new variable called newMyName
 
-var newMyName = myName();
+var newMyName = myName;
 
 //Now alert the result of invoking newMyName
 
-// alert(newMyName);
+// alert(newMyName());
 
 //Next problem
 
@@ -103,6 +103,6 @@ function outerFn() {
 
 var innerFn = outerFn();
 
-alert(innerFn());
+// alert(innerFn());
 
 //Now invoke innerFn.

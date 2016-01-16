@@ -9,11 +9,11 @@ var outer = function(){
 //Above you're given a function that returns another function which has a closure over the name variable.
 //Invoke outer saving the return value into another variable called 'inner'.
 
-  //Code Here
+var inner = outer();
 
 //Once you do that, invoke inner.
 
-  //Code Here
+// alert(inner());
 
 
 
@@ -32,7 +32,8 @@ var callFriend = function(){
 //Above you're given a callFriend function that returns another function.
 //Do what you need to do in order to call your function and get 'Calling Jake at 435-215-9248' in your console.
 
-  //Code Here
+var hey = callFriend();
+// alert(hey("435-215-9248"));
 
 
 
@@ -44,12 +45,47 @@ var callFriend = function(){
   Write a function called makeCounter that makes the following code work properly.
 */
 
-  //Code Here
-  var count = makeCounter();
-  count(); // 1
-  count(); // 2
-  count(); // 3
-  count(); // 4
+function makeCounter() {
+  var counter = 1;
+  return function() {
+    return counter++;
+  }
+}
+
+var count = makeCounter();
+
+// alert(count());
+
+
+//Next Problem
+
+
+
+/*
+  Write a function named codeLove that returns the string 'I love code'.
+  Write a second function named codeFriend that accepts the first function as it's first parameter.
+  The second function should return a new third function. Store the third function in a variable,
+  codeEcho which, when invoked, invokes the first, original function that was passed in, but will
+  only ever do so once (returns null after first invocation).
+*/
+
+function codeLove() {
+  return "I love code";
+}
+
+function codeFriend(firstFunc) {
+  var counter = 0;
+  return function() {
+    if (counter > 0) {
+      return null;
+    }
+    counter++;
+    return firstFunc();
+  }
+}
+
+var codeEcho = codeFriend(codeLove);
+// alert(codeEcho());
 
 
 
@@ -58,22 +94,26 @@ var callFriend = function(){
 
 
 /*
-  Write a function named codeLove that returns the string 'I love code'. Write a second function named codeFriend that accepts the first function as it's first parameter. The second function should return a new third function. Store the third function in a variable, codeEcho which, when invoked, invokes the first, original function that was passed in, but will only ever do so once (returns null after first invocation).
+  Now, similar to the last problem, write a function called 'fnCounter' that accepts two parameters.
+  The first parameter will be an anonymous function and the second parameter, 'N', will be a number.
+  Now, in 'fnCounter', allow the anonymous function to be invoked 'N' number of times.
+  After it's been invoked 'N' number of times, return 'STOP'.
 */
 
-  //Code Here
+function fnCounter(param1, N) {
+  var counter = 0;
+  return function() {
+    if (counter > N) {
+      return "STOP";
+    }
+    counter++;
+    return param1();
+  }
+}
 
+var result = fnCounter(function(){alert("hi")}, 10)
 
-
-//Next Problem
-
-
-
-/*
-  Now, similar to the last problem, write a function called 'fnCounter' that accepts two parameters. The first parameter will be an anonymous function and the second parameter, 'N', will be a number. Now, in 'fnCounter', allow the anonymous funciton to be invoked 'N' number of times. After it's been invoked 'N' number of times, return 'STOP'.
-*/
-
-
+// result();
 
 //Next Problem
 
@@ -88,26 +128,48 @@ var callFriend = function(){
     }
   };
 
-  Above you have a function named counter. Examine the function (without running the code) then below write what you expect to happen when the funciton is invoked. *Hint: setTimeout calls a function or evaluates an expression after a specified number of milliseconds.
+  Above you have a function named counter. Examine the function (without running the code)
+  then below write what you expect to happen when the function is invoked. *Hint: setTimeout
+  calls a function or evaluates an expression after a specified number of milliseconds.
 
-    //Answer Here
+It will print (console log) number 1 in one second, 2 in two seconds, 3 in three seconds, etc. to 5
 
 
   Now, run the function in your console and note what happpens.
 
   Was your answer right or wrong?
 
-    //Answer Here
+  Wrong; says undefined
 
 
   Fix the counter function so that it works the way you expect it to work. (logging 1 then 2 then 3, etc) (Note: No unit test for this one because of the timeout)
 */
 
-    //Code Here
-
+var counter = function() {
+  for (var i=1; i < 6; i++) {
+    setTimeout(function timer(print) {
+      return function() {
+        console.log(print);
+      }
+    } (i), i*1000);
+  }
+}
+counter();
 
 
 //Next Problem
+
+
+function funcArray() {
+  var counter = 0;
+  return function() {
+    return counter++;
+  }
+}
+
+var result = funcArray();
+
+alert("funcArray["+result()+"]");
 
 
 
@@ -123,5 +185,3 @@ var callFriend = function(){
 
   *Hint: Don't let this fool you. Break down what's really happening here.
 */
-
-
